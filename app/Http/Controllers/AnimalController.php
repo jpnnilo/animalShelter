@@ -1,64 +1,44 @@
 <?php
 
 namespace App\Http\Controllers;
-use Validator;
 
 use App\Models\Animal;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
+
 
 class AnimalController extends Controller
 {
-
-   
-    //show all information from animal table
-    public function index(){
-        $header ='Animals';
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {   
+        $header = "Animal List";
         $listings = Animal::all();
-        return view('animal', compact('header','listings'));
+        return view('animal.index', compact('listings','header'));
     }
 
-    //show specific information 
-    public function edit($animal){
-
-        $header = "Animal";
-        $animal = Animal::find($animal);
-        return view('animalupdate', compact('header','animal'));
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {   
+        $header = "Create Animal";
+        return view('animal.form', compact('header'));
     }
 
-    public function update(Request $request, $id){
-        
-
-        $validate = $request->validate([
-            'name' => 'required',
-            'age' => 'required',
-            'gender' => 'required',
-            'breed' => 'required',
-            'type' => 'required'    
-        ]);
-
-        
-        $id = Animal::find($id);
-        $id->name = $request->name;
-        $id->age = $request->age;
-        $id->gender = $request->gender;
-        $id->breed = $request->breed;
-        $id->type = $request->type;
-        $id->save();
-        return redirect('/animal'); 
-
-    }
-
-    
-    public function create(){
-
-        $header = "Add";
-
-        return view('animaladd', compact('header'));
-    }
-
-
-    public function store(Request $request){
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $validate = $request->validate([
             'name' => 'required',
             'age' =>'required',
@@ -68,13 +48,70 @@ class AnimalController extends Controller
         ]);
         
         Animal::create($validate);
-        return redirect('/animal');
+        return redirect(route('animal.index'));
     }
 
-
-    public function destroy($id){
-         $id = Animal::find($id)->delete();
-        return redirect('/animal');
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       //
     }
-    
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $header = "Update Animal";
+        $animal = Animal::find($id);
+        return view('animal.form', compact('animal','header'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+            'breed' => 'required',
+            'type' => 'required'    
+        ]);
+        
+        $animal = Animal::find($id);
+        $animal->name = $request->name;
+        $animal->age = $request->age;
+        $animal->gender = $request->gender;
+        $animal->breed = $request->breed;
+        $animal->type = $request->type;
+        $animal->save();
+        return redirect(route('animal.index')); 
+    }
+        
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $id = Animal::find($id)->delete();
+        return redirect( route('animal.index'));
+    }
+
 }
