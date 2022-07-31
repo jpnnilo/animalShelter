@@ -41,7 +41,7 @@ class AnimalController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
-            'age' =>'required',
+            'age' => ['required','numeric'],
             'gender' => 'required',
             'breed' => 'required',
             'type' => 'required',
@@ -86,7 +86,7 @@ class AnimalController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
-            'age' => 'required',
+            'age' => ['required','numeric'],
             'gender' => 'required',
             'breed' => 'required',
             'type' => 'required'    
