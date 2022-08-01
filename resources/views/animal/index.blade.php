@@ -2,11 +2,10 @@
 @section('content')
 
 
+<div class="container">
 
-<a href="{{ route('animal.create') }}"><button type="button" class="btn btn-primary" >Add</button></a>
-
-<H2>{{ $header }}</H2>
-
+<H2 >{{ $header }}</H2>
+<div class="float-end "><a href="{{ route('animal.create') }}"><button type="button" class="btn btn-primary">Create</button></a></div>
 <table class="table">
   <thead class="thead-light">
     <tr>
@@ -28,12 +27,17 @@
         <td>{{ $list->breed }}</td>
         <td>{{ $list->type }}</td>
         <td></td>
-        <td><a href="{{ route('animal.edit', [$list->id]) }}"><button type="button" class="btn btn-success">Edit</button></a> 
+        <td>
+          <a href="{{ route('animal.edit', [$list->id]) }}"><button type="button" class="btn btn-success">Edit</button></a> 
+
           <form method="POST" action="{{ route('animal.destroy' , [$list->id]) }}" > @csrf 
-            @method('DELETE') <button type="submit" class="btn btn-danger">Delete</button></form></td>
+            @method('DELETE') <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
       </tr>
     @endforeach
   </tbody>
 </table>
+</div>
 
 @endsection

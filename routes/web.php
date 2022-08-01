@@ -5,6 +5,7 @@ use App\Models\Animal;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\Rescuer;
+use App\Http\Controllers\RescuerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,7 @@ use App\Http\Controllers\Rescuer;
 
 Route::view('/', ('index'));
 
-Route::resource('animal', AnimalController::class);
+Route::resources([
+    'animal' => AnimalController::class,
+    'rescuer' => RescuerController::class
+]); 

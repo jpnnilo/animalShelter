@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>Animal Shelter</title>
-    @include('partials._nav')
 </head>
 <body>
-    
-    <div class="container">
+    @include('partials._nav')
+    <div >
         @yield('content')   
     </div>
+    
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

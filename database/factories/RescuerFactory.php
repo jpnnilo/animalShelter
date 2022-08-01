@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class AnimalFactory extends Factory
+class RescuerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,16 +16,19 @@ class AnimalFactory extends Factory
      */
     public function definition()
     {
-        
-        $gender = fake()->randomElement(['Male', 'Female']);
-        $type = fake()->randomElement(['Dog', 'Cat']);
+        $gender = fake()->randomElement(['Male','Female']);   
         return [
             'name' => fake()->name(),
             'age' => fake()->randomDigit(),
-            'breed' => fake()->text(10),
-            'gender' => $gender,
-            'type'=> $type
+            'gender' => $gender
         ];
-        
+
+        // $gender = fake()->randomElement(['Male', 'Female']);
+        // return [
+        //     'name' => fake()->name(),
+        //     'age' => fake()->randomDigit(),
+        //     'gender' => $gender,
+        // ];
+
     }
 }

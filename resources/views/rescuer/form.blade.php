@@ -1,57 +1,47 @@
 @extends('layouts.master')
 
 @section('content')
+ 
 
-<H2>{{ $header }}</H2>
 <div class="container">
-  <form method="POST" action="{{  isset($animal) ? route('animal.update', [$animal->id]) :  route('animal.store')  }}">
-    @if (isset($animal))
-        @method('PUT')
-    @else
-        @method('POST')
+  <H2>{{ $header }}</H2>
+  <form method="POST" action="{{  isset($rescuer) ? route('rescuer.update', [$rescuer->id]) :  route('rescuer.store')  }}">
+    @if (isset($rescuer))
+      @method('PUT')
     @endif
 
     @csrf
-    @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif  
     <div class="form-group">
       <label for="recipient-name" class="col-form-label">Name: </label>
-      <input type="text" class="form-control" name="name" value="{{ isset($animal) ? $animal->name : ''}}">
+      <input type="text" class="form-control" name="name" value="{{ isset($rescuer) ? $rescuer->name : ''}}">
+      @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label for="recipient-name" class="col-form-label">Age: </label>
-      <input type="text" class="form-control" name="age" value="{{ isset($animal) ? $animal->age : ''}}">
+      <input type="text" class="form-control" name="age" value="{{ isset($rescuer) ? $rescuer->age : ''}}">
+      @error('age')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <label for="recipient-name" class="col-form-label">Gender: </label>
     <div class="form-check">
-      <input type="radio" class="form-check-input" id="radio1" name="gender" value="Male"{{ isset($animal) && ($animal->gender == 'Male') ? 'checked' : '' }}> 
+      <input type="radio" class="form-check-input" id="radio1" name="gender" value="Male"{{ isset($rescuer) && ($rescuer->gender == 'Male') ? 'checked' : '' }}> 
       <label class="form-check-label" for="radio1">Male </label> 
     </div>
     <div class="form-check">
-      <input type="radio" class="form-check-input" id="radio2" name="gender" value="Female" {{ isset($animal) ? $gender = $animal->gender : $gender = '' }} {{ ($gender == 'Female') ? 'checked': '' }} >
+      <input type="radio" class="form-check-input" id="radio2" name="gender" value="Female" {{ isset($rescuer) ? $gender = $rescuer->gender : $gender = '' }} {{ ($gender == 'Female') ? 'checked': '' }} >
       <label class="form-check-label" for="radio2">Female</label>
     </div>
-    <div class="form-group">
-      <label for="recipient-name" class="col-form-label">Breed:  </label>
-      <input type="text" class="form-control" name="breed" value="{{ isset($animal) ? $animal->breed : ''}}" >
-    </div>
-    <div class="form-group">
-      <label for="recipient-name" class="col-form-label">Type:  </label>
-      <input type="text" class="form-control" name="type" value="{{ isset($animal) ? $animal->breed : ''}}">
+    @error('gender')
+      <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    
+    <div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="reset" onclick="location.href='{{ route('rescuer.index') }}'" class="btn btn-secondary">Cancel</button>
     </div>  
-    <div class="form-group">
-      <label for="recipient-name" class="col-form-label">Status:  </label>
-      <input type="text" class="form-control" name="status">
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-   <button type="reset" onclick="location.href='/animal'" class="btn btn-secondary">Cancel</button>
   </form>
 </div>  
 @endsection

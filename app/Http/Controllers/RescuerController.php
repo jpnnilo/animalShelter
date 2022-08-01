@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;
+use App\Models\Rescuer;
 use Illuminate\Http\Request;
 
-
-class AnimalController extends Controller
+class RescuerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,10 @@ class AnimalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $header = "Animal List";
-        $listings = Animal::all();
-        return view('animal.index', compact('listings','header'));
+    {
+        $header = "Rescuer List";
+        $listings = Rescuer::all();
+        return view('rescuer.index', compact('header', 'listings'));
     }
 
     /**
@@ -26,9 +25,9 @@ class AnimalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $header = "Create Animal";
-        return view('animal.form', compact('header'));
+    {
+        $header = "Add Rescuer";
+        return view('rescuer.form', compact('header'));
     }
 
     /**
@@ -41,14 +40,12 @@ class AnimalController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
-            'age' => ['required','numeric'],
+            'age' => ['required', 'numeric'],
             'gender' => 'required',
-            'breed' => 'required',
-            'type' => 'required',
         ]);
-        
-        Animal::create($validate);
-        return redirect(route('animal.index'));
+
+        rescuer::create($validate);
+        return redirect(route('rescuer.index'));
     }
 
     /**
@@ -59,7 +56,7 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
@@ -70,9 +67,9 @@ class AnimalController extends Controller
      */
     public function edit($id)
     {
-        $header = "Update Animal";
-        $animal = Animal::find($id);
-        return view('animal.form', compact('animal','header'));
+        $header = "Update Rescuer";
+        $rescuer = rescuer::find($id);
+        return view('rescuer.form', compact('header', 'rescuer'));
     }
 
     /**
@@ -85,23 +82,20 @@ class AnimalController extends Controller
     public function update(Request $request, $id)
     {
         $validate = $request->validate([
-            'name' => 'required',
+            'name'=> 'required',
             'age' => ['required','numeric'],
-            'gender' => 'required',
-            'breed' => 'required',
-            'type' => 'required'    
+            'gender' => 'required'
         ]);
-        
-        $animal = Animal::find($id);
-        $animal->name = $request->name;
-        $animal->age = $request->age;
-        $animal->gender = $request->gender;
-        $animal->breed = $request->breed;
-        $animal->type = $request->type;
-        $animal->save();
-        return redirect(route('animal.index')); 
+
+        $rescuer = Rescuer::find($id);
+        $rescuer->name = $request->name;
+        $rescuer->age = $request->age;
+        $rescuer->gender = $request->gender;
+        $rescuer->save();
+
+        return redirect(route('rescuer.index'));
     }
-        
+
     /**
      * Remove the specified resource from storage.
      *
@@ -110,8 +104,7 @@ class AnimalController extends Controller
      */
     public function destroy($id)
     {
-        Animal::find($id)->delete();
-        return redirect( route('animal.index'));
+        Rescuer::find($id)->delete();
+        return redirect(route('rescuer.index'));
     }
-
 }

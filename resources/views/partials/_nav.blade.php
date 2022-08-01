@@ -8,7 +8,7 @@
           <a class="nav-link" href="{{ route('animal.index') }}">Animal</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Rescuer</a>
+          <a class="nav-link" href="{{ route('rescuer.index') }}">Rescuer</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Employee</a>
