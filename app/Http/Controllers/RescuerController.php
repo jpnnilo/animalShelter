@@ -44,7 +44,7 @@ class RescuerController extends Controller
             'gender' => 'required',
         ]);
 
-        rescuer::create($validate);
+        Rescuer::create($validate);
         return redirect(route('rescuer.index'));
     }
 

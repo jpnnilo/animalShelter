@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-
-class AnimalController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,10 @@ class AnimalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $header = "Animal List";
-        $listings = Animal::all();
-        return view('animal.index', compact('listings','header'));
+    {
+        $header = "Employee List";
+        $listings = Employee::all();
+        return view('employee.index', compact('header','listings'));
     }
 
     /**
@@ -26,92 +25,94 @@ class AnimalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        $header = "Create Animal";
-        return view('animal.form', compact('header'));
+    {
+        $header = "Create Employee";
+        return view('employee.form', compact('header'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $validate = $request->validate([
             'name' => 'required',
             'age' => ['required','numeric'],
             'gender' => 'required',
-            'breed' => 'required',
-            'type' => 'required',
+            'type' => 'required'
         ]);
-        
-        Animal::create($validate);
-        return redirect(route('animal.index'));
+
+        $employee = new Employee;
+        $employee->name = $request->name;
+        $employee->age = $request->age;
+        $employee->gender = $request->gender;
+        $employee->type = $request->type;
+        $employee->save();
+        return redirect(route('employee.index'));
+
     }
-    
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-       //
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $header = "Update Animal";
-        $animal = Animal::find($id);
-        return view('animal.form', compact('animal','header'));
+    {   
+        $header = "Update Employee";
+        $employee = Employee::Find($id);
+        return view('employee.form', compact('header','employee'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        
         $validate = $request->validate([
             'name' => 'required',
-            'age' => ['required','numeric'],
+            'age' => 'required|numeric',
             'gender' => 'required',
-            'breed' => 'required',
-            'type' => 'required'    
+            'type' => 'required'
         ]);
+        $employee = Employee::find($id);
+        $employee->name = $request->name;
+        $employee->age = $request->age;
+        $employee->gender = $request->gender;
+        $employee->type = $request->type;
+        $employee->save();
         
-        $animal = Animal::find($id);
-        $animal->name = $request->name;
-        $animal->age = $request->age;
-        $animal->gender = $request->gender;
-        $animal->breed = $request->breed;
-        $animal->type = $request->type;
-        $animal->save();
-        return redirect(route('animal.index')); 
+        return redirect(route('employee.index'));
     }
-        
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Animal::find($id)->delete();
-        return redirect( route('animal.index'));
+        $employee = Employee::find($id)->delete();
+        return redirect(route('employee.index'));
     }
-
 }

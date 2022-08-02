@@ -2,7 +2,6 @@
 
 @section('content')
  
-
 <div class="container">
   <H2>{{ $header }}</H2>
   <form method="POST" action="{{  isset($rescuer) ? route('rescuer.update', [$rescuer->id]) :  route('rescuer.store')  }}">

@@ -2,10 +2,12 @@
 
 
 use App\Models\Animal;
+use App\Http\Controllers\Rescuer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
-use App\Http\Controllers\Rescuer;
+use App\Http\Controllers\AdopterController;
 use App\Http\Controllers\RescuerController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,13 @@ use App\Http\Controllers\RescuerController;
 |
 */
 
-Route::view('/', ('index'));
+Route::view('/', ('index'))->name('home');
 
 Route::resources([
     'animal' => AnimalController::class,
-    'rescuer' => RescuerController::class
+    'rescuer' => RescuerController::class,
+    'employee' => EmployeeController::class,
+    'adopter' => AdopterController::class
 ]); 
+
+
