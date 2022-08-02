@@ -7,7 +7,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Animal;
 use App\Models\Rescuer;
-use App\Models\Employee;
 use Illuminate\Database\Seeder;
 use Database\Seeders\AdopterSeeder;
 use Database\Seeders\EmployeeSeeder;
@@ -25,7 +24,9 @@ class DatabaseSeeder extends Seeder
         //this is the correct way to use seeder and factory
         $adopter = AdopterSeeder::class;
         $employee = EmployeeSeeder::class;
-        $this->call(compact('employee','adopter'));
+        $disease = DiseaseSeeder::class;
+       
+        $this->call(compact('employee','adopter','disease'));
 
         //however, you can also use seeder by directly call model
         User::factory(4)->create();
