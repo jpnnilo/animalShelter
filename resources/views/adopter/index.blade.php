@@ -12,7 +12,7 @@
       <th>Name</th>
       <th>Age</th>
       <th>Gender</th>
-      <th>address</th>
+      <th>Address</th>
       <th>Actions</th>
     </tr>
   </thead>

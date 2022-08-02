@@ -32,7 +32,7 @@
                       Donation
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                      <li><a class="dropdown-item" href="#">Cash</a></li>
+                      <li><a class="dropdown-item" href="{{ route('cashdonation.index') }}">Cash</a></li>
                       <li><a class="dropdown-item" href="#">Material</a></li>
                     </ul>
                   </li>

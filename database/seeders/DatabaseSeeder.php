@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
         $adopter = AdopterSeeder::class;
         $employee = EmployeeSeeder::class;
         $disease = DiseaseSeeder::class;
-       
-        $this->call(compact('employee','adopter','disease'));
+        $cash = CashDonationSeeder::class;
+        $this->call(compact('employee','adopter','disease','cash'));
 
         //however, you can also use seeder by directly call model
         User::factory(4)->create();
