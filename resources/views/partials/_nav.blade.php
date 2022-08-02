@@ -23,15 +23,24 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::current()->getName() == 'disease.index' ? 'active' : '' }}"
-                    href="{{ route('adopter.index') }}">Disease</a>
+                    href="{{ route('disease.index') }}">Disease</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::current()->getName() == 'donation.index' ? 'active' : '' }}"
-                    href="{{ route('adopter.index') }}">Donation</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Donation
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item" href="#">Cash</a></li>
+                      <li><a class="dropdown-item" href="#">Material</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
         </ul>
     </div>
 </nav>
+
+
+
