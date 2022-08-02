@@ -16,8 +16,8 @@ class DiseaseFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        $name = fake()->name();
+        $description = fake()->text($maxNbChars = 500);
+        return compact('name','description');
     }
 }

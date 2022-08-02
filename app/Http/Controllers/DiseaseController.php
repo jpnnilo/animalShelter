@@ -14,7 +14,9 @@ class DiseaseController extends Controller
      */
     public function index()
     {
-        //
+        $header = "Disease List";
+        $listings = Disease::all();
+        return view('disease.index',compact('header','listings'));
     }
 
     /**
@@ -24,7 +26,8 @@ class DiseaseController extends Controller
      */
     public function create()
     {
-        //
+        $header = "Create Disease";
+        return view('disease.form', compact('header'));
     }
 
     /**
@@ -35,7 +38,18 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $disease = new Disease();
+        $disease->name = $request->name;
+        $disease->description = $request->description;
+        $disease->save();
+
+        return  redirect(route('disease.index'));
+
     }
 
     /**
@@ -44,7 +58,7 @@ class DiseaseController extends Controller
      * @param  \App\Models\Disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function show(Disease $disease)
+    public function show($id)
     {
         //
     }
@@ -55,9 +69,11 @@ class DiseaseController extends Controller
      * @param  \App\Models\Disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function edit(Disease $disease)
+    public function edit($id)
     {
-        //
+        $header = "Update Disease";
+        $disease = Disease::find($id);
+        return view('disease.form', compact('header','disease'));
     }
 
     /**
@@ -67,9 +83,18 @@ class DiseaseController extends Controller
      * @param  \App\Models\Disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Disease $disease)
+    public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        $disease = Disease::find($id);
+        $disease->name = $request->name;
+        $disease->description = $request->description;
+        $disease->save();
+        return redirect(route('disease.index'));
     }
 
     /**
@@ -78,8 +103,9 @@ class DiseaseController extends Controller
      * @param  \App\Models\Disease  $disease
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Disease $disease)
+    public function destroy($id)
     {
-        //
+        Disease::find($id)->delete();
+        return redirect(route('disease.index'));
     }
 }
