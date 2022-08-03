@@ -30,9 +30,10 @@ class DatabaseSeeder extends Seeder
         $this->call(compact('employee','adopter','disease','cash','material'));
 
         //however, you can also use seeder by directly call model
-        User::factory(4)->create();
-        Animal::factory(4)->create();
-        $rescuer = Rescuer::factory(4)->create();
+        Rescuer::factory(10)->create();
+        User::factory(10)->create();
+        Animal::factory(10)->create();
+        
         
 
         // \App\Models\User::factory()->create([

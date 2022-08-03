@@ -16,16 +16,17 @@ class AnimalFactory extends Factory
      */
     public function definition()
     {
-        
         $gender = fake()->randomElement(['Male', 'Female']);
         $type = fake()->randomElement(['Dog', 'Cat']);
+        $rescuer_id = fake()->numberBetween($min=1, $max=4);
         return [
+            'rescuer_id' => $rescuer_id,
             'name' => fake()->name(),
             'age' => fake()->randomDigit(),
             'breed' => fake()->text(10),
             'gender' => $gender,
-            'type'=> $type
-        ];
-        
+            'type'=> $type,
+            'location' => fake()->address()
+        ];   
     }
 }

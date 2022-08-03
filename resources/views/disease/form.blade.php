@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+
 <H2>{{ $header }}</H2>
   <form method="POST" action="{{  isset($disease) ? route('disease.update', [$disease->id]) :  route('disease.store')  }}">
     @if (isset($disease))
@@ -24,9 +24,8 @@
         <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>
-    
     <button type="submit" class="btn btn-success">Submit</button>
    <button type="reset" onclick="location.href='/disease'" class="btn btn-secondary">Cancel</button>
   </form>
-</div>  
+
 @endsection

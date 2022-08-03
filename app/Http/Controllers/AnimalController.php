@@ -59,7 +59,7 @@ class AnimalController extends Controller
      */
     public function show($id)
     {
-       //
+  
     }
 
     /**

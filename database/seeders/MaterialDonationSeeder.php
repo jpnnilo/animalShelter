@@ -15,6 +15,6 @@ class MaterialDonationSeeder extends Seeder
      */
     public function run()
     {
-        MaterialDonation::factory(5)->create();
+        MaterialDonation::factory(10)->create();
     }
 }

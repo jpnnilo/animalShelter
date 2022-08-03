@@ -15,6 +15,6 @@ class DiseaseSeeder extends Seeder
      */
     public function run()
     {
-        Disease::factory(4)->create();
+        Disease::factory(10)->create();
     }
 }

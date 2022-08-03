@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Animal;
 use App\Http\Controllers\Rescuer;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +23,16 @@ use App\Http\Controllers\MaterialDonationController;
 */
 
 Route::view('/', ('index'))->name('home');
+
+
+Route::name('admin.')->group(function () {
+    Route::get('/users', function () {
+        // Route assigned name "admin.users"...
+    })->name('users');
+});
+
+Route::get('rescuer/list', [RescuerController::class, 'index'])->name('rescuer.list');
+// Route::get('rescuer/list/information{id}', [RescuerController::class, 'show'])->name('rescuer.list.information');
 
 Route::resources([
     'animal' => AnimalController::class,

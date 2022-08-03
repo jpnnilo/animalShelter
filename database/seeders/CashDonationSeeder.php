@@ -15,6 +15,6 @@ class CashDonationSeeder extends Seeder
      */
     public function run()
     {
-        CashDonation::factory(4)->create();
+        CashDonation::factory(10)->create();
     }
 }

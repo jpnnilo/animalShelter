@@ -9,4 +9,9 @@ class Animal extends Model
 {
     use HasFactory;
     protected $fillable = [ 'name', 'age', 'breed', 'gender', 'type' ];
+
+    //many animal to one rescuer
+    public function rescuer(){
+        return $this->belongsTo(Rescuer::class);
+    }
 }

@@ -2,21 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Animal;
 use App\Models\Rescuer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class RescuerController extends Controller
 {
+
+    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $route = Route::currentRouteName();
         $header = "Rescuer List";
         $listings = Rescuer::all();
-        return view('rescuer.index', compact('header', 'listings'));
+        
+        if ($route == ("rescuer.index")) {
+            return view('rescuer.index', compact('header', 'listings'));
+        } else {
+            return view('rescuer.list',compact('header','listings'));
+        }
+
     }
 
     /**
@@ -43,20 +55,30 @@ class RescuerController extends Controller
             'age' => ['required', 'numeric'],
             'gender' => 'required',
         ]);
-
         Rescuer::create($validate);
         return redirect(route('rescuer.index'));
     }
 
+
     /**
+     * get the rescuer together with the rescued animals
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $header = "Rescuer Information";
+        $rescuer = Rescuer::find($id);
+
+        return view('rescuer.information', compact('rescuer', 'header'));
+        // foreach ($rescuer as $animal) {
+            //
+        // }
+        
+        // return view('rescuer.information', compact('rescuer', 'header'));
+        
     }
 
     /**
