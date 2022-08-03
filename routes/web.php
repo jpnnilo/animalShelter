@@ -6,10 +6,11 @@ use App\Http\Controllers\Rescuer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\AdopterController;
-use App\Http\Controllers\CashDonationController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\RescuerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\CashDonationController;
+use App\Http\Controllers\MaterialDonationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,6 @@ Route::resources([
     'employee' => EmployeeController::class,
     'adopter' => AdopterController::class,
     'disease' => DiseaseController::class,
-    'cashdonation' => CashDonationController::class
-]); 
-
-
+    'cashdonation' => CashDonationController::class,
+    'materialdonation' => MaterialDonationController::class
+]);
