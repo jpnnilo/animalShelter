@@ -71,14 +71,7 @@ class RescuerController extends Controller
     {   
         $header = "Rescuer Information";
         $rescuer = Rescuer::find($id);
-
-        return view('rescuer.information', compact('rescuer', 'header'));
-        // foreach ($rescuer as $animal) {
-            //
-        // }
-        
-        // return view('rescuer.information', compact('rescuer', 'header'));
-        
+        return view('rescuer.information', compact('rescuer', 'header'));    
     }
 
     /**
