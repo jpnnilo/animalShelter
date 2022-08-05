@@ -15,6 +15,6 @@ class AdopterSeeder extends Seeder
      */
     public function run()
     {
-        Adopter::factory(10)->create();
+        Adopter::factory(5)->create();
     }
 }

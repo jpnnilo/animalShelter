@@ -7,6 +7,7 @@
                     href="{{ route('home') }}">Home</a>
             </li>
             <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'rescuer.index' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'adopter.index' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a></li>
 
             {{-- need to add login for adminstrator --}}
             <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">

@@ -14,4 +14,8 @@ class Animal extends Model
     public function rescuer(){
         return $this->belongsTo(Rescuer::class);
     }
+
+    public function adopter(){
+        return $this->belongsTo(Adopter::class);
+    }
 }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Adopter extends Model
 {
     use HasFactory;
+
+    public function animals(){
+        return $this->hasMany(Animal::class);
+    }
 }

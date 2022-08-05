@@ -18,9 +18,11 @@ class AnimalFactory extends Factory
     {
         $gender = fake()->randomElement(['Male', 'Female']);
         $type = fake()->randomElement(['Dog', 'Cat']);
-        $rescuer_id = fake()->numberBetween($min=1, $max=4);
+        $rescuer_id = fake()->numberBetween($min=1, $max=10);
+        $adopter_id = fake()->numberBetween($min=1, $min=5);
         return [
             'rescuer_id' => $rescuer_id,
+            'adopter_id' => $adopter_id,
             'name' => fake()->name(),
             'age' => fake()->randomDigit(),
             'breed' => fake()->text(10),

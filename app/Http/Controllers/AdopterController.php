@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Adopter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class AdopterController extends Controller
 {
@@ -13,11 +14,17 @@ class AdopterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $route = Route::currentRouteName();
         $header = "Adopter List";
         $listings = Adopter::all();
 
-        return view('adopter.index', compact('listings', 'header'));
+        if ($route == "adopter.index") {
+            return view('adopter.index', compact('listings', 'header'));
+        } else {
+            return view('adopter.list', compact('listings', 'header'));
+        }
+        
     }
 
     /**
@@ -58,14 +65,17 @@ class AdopterController extends Controller
     }
 
     /**
+     * Display the adopted animals
      * Display the specified resource.
-     *
+     * 
      * @param  \App\Models\Adopters  $adopters
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        
+        $header = "Adopter Information";
+        $adopter = Adopter::find($id);
+        return view('adopter.information', compact('header','adopter'));
     }
 
     /**

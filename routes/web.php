@@ -31,8 +31,13 @@ Route::name('admin.')->group(function () {
     })->name('users');
 });
 
-Route::get('rescuer/list', [RescuerController::class, 'index'])->name('rescuer.list');
-// Route::get('rescuer/list/information{id}', [RescuerController::class, 'show'])->name('rescuer.list.information');
+// list of all rescuer
+Route::get('rescuer/list', [RescuerController::class, 'index'])->name('rescuer.list'); 
+
+// list of all adopter
+Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.list');
+
+
 
 Route::resources([
     'animal' => AnimalController::class,
