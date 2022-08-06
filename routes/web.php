@@ -37,6 +37,8 @@ Route::get('rescuer/list', [RescuerController::class, 'index'])->name('rescuer.l
 // list of all adopter
 Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.list');
 
+//list of all animal
+Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
 
 
 Route::resources([

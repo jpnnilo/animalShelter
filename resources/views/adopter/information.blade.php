@@ -16,7 +16,7 @@
     </div>
 
     <h4 style="margin-bottom: 20px;">Adopted Animals</h4>
-    <dxiv class="row ">
+    <div class="row ">
         @forelse($adopter->animals as $animals)
             <div class="col-sm-3">
 
@@ -35,5 +35,5 @@
         @endforelse
 
 
-    </dxiv>
+    </div>
 @endsection

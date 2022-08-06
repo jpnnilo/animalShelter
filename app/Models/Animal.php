@@ -18,4 +18,12 @@ class Animal extends Model
     public function adopter(){
         return $this->belongsTo(Adopter::class);
     }
+    
+    public function diseases(){
+        return $this->belongsToMany(Disease::class);
+    }
+
+    public function animalImages(){
+        return $this->hasMany(AnimalImage::class);
+    }
 }

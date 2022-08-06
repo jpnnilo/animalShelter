@@ -6,8 +6,9 @@
                 <a class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : '' }}"
                     href="{{ route('home') }}">Home</a>
             </li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'rescuer.index' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a></li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'adopter.index' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'rescuer.list' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'adopter.list' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Animals</a></li>
 
             {{-- need to add login for adminstrator --}}
             <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
@@ -15,7 +16,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin
+                            Admin   
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="{{ route('animal.index') }}">Animal</a></li>

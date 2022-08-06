@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 
 class AnimalController extends Controller
-{
+{   
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,9 +18,18 @@ class AnimalController extends Controller
      */
     public function index()
     {   
+        $route = Route::currentRouteName();
         $header = "Animal List";
         $listings = Animal::all();
-        return view('animal.index', compact('listings','header'));
+
+    
+        if ($route == "animal.index") {
+            return view('animal.index', compact('listings','header'));
+        } else {
+            return view('animal.list', compact('listings', 'header'));
+        }
+        
+       
     }
 
     /**
@@ -30,6 +42,8 @@ class AnimalController extends Controller
         $header = "Create Animal";
         return view('animal.form', compact('header'));
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -58,8 +72,10 @@ class AnimalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-  
+    {   
+        $header = "Animal Health Status";
+        $animal = Animal::find($id);
+        return view('animal.health', compact('header', 'animal'));  
     }
 
     /**
