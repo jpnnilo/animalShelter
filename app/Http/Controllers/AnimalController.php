@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
+use App\Models\Disease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +43,7 @@ class AnimalController extends Controller
         $header = "Create Animal";
         return view('animal.form', compact('header'));
     }
-
     
-
     /**
      * Store a newly created resource in storage.
      *
@@ -71,11 +70,18 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {   
         $header = "Animal Health Status";
         $animal = Animal::find($id);
-        return view('animal.health', compact('header', 'animal'));  
+        $diseases = Disease::all();
+        return view('animal.health', compact('header', 'animal','diseases')); 
+    }
+
+    public function showDiseases($id){
+        $animal = Animal::find($id)->diseases;
+        return response()->json(compact('animal'));
     }
 
     /**
@@ -90,6 +96,16 @@ class AnimalController extends Controller
         $animal = Animal::find($id);
         return view('animal.form', compact('animal','header'));
     }
+
+    public function addDisease(Request $request, $id){
+        $request->validate([
+            'disease' => 'required'
+        ]);
+        $animal = Animal::find($id);
+        $animal->diseases()->attach($request->disease);
+        return redirect(route('animal.show', $animal->id));
+    }
+
 
     /**
      * Update the specified resource in storage.

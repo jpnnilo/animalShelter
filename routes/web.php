@@ -24,13 +24,6 @@ use App\Http\Controllers\MaterialDonationController;
 
 Route::view('/', ('index'))->name('home');
 
-
-Route::name('admin.')->group(function () {
-    Route::get('/users', function () {
-        // Route assigned name "admin.users"...
-    })->name('users');
-});
-
 // list of all rescuer
 Route::get('rescuer/list', [RescuerController::class, 'index'])->name('rescuer.list'); 
 
@@ -39,6 +32,11 @@ Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.l
 
 //list of all animal
 Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
+
+Route::get('animal/disease/{id}', [AnimalController::class, 'showDiseases']);
+
+//add animal diseases
+Route::post('animal/list/{id}', [AnimalController::class, 'addDisease'])->name('animal.addDisease');
 
 
 Route::resources([
