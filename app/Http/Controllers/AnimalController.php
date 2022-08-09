@@ -79,9 +79,27 @@ class AnimalController extends Controller
         return view('animal.health', compact('header', 'animal','diseases')); 
     }
 
+    //show diseases per animal
     public function showDiseases($id){
         $animal = Animal::find($id)->diseases;
         return response()->json(compact('animal'));
+    }
+
+    //show diseases per animal
+    public function addDisease(Request $request, $id){
+        $validate = $request->validate([
+            'disease' => 'required'
+        ]);
+
+        // dd($validate);
+        
+        $animal = Animal::find($id);
+        $animalId = $animal->id;
+        $animal->diseases()->attach($request->disease);
+        $diseaseId = $request->disease;
+        $status = "200";
+        $message = "Disease has been added";
+        return response()->json(compact('status','message','animalId','diseaseId'));
     }
 
     /**
@@ -95,15 +113,6 @@ class AnimalController extends Controller
         $header = "Update Animal";
         $animal = Animal::find($id);
         return view('animal.form', compact('animal','header'));
-    }
-
-    public function addDisease(Request $request, $id){
-        $request->validate([
-            'disease' => 'required'
-        ]);
-        $animal = Animal::find($id);
-        $animal->diseases()->attach($request->disease);
-        return redirect(route('animal.show', $animal->id));
     }
 
 

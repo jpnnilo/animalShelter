@@ -1,11 +1,11 @@
     <!-- Button trigger modal -->
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDisease" style="margin-bottom: 20px;">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDisease-modal" style="margin-bottom: 20px;">
         Add Animal Disease
     </button>
 
     <!-- Modal -->
 
-    <div class="modal fade" id="addDisease" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addDisease-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="save" class="btn btn-primary" >Save changes</button>
+                    <button type="button" id="addDisease" class="btn btn-primary" >Save changes</button>
 
                 </div>
             </div>

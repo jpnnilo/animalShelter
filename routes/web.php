@@ -33,10 +33,11 @@ Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.l
 //list of all animal
 Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
 
+//show diseases per animal
 Route::get('animal/disease/{id}', [AnimalController::class, 'showDiseases']);
 
 //add animal diseases
-Route::post('animal/list/{id}', [AnimalController::class, 'addDisease'])->name('animal.addDisease');
+Route::post('animal/disease/{id}', [AnimalController::class, 'addDisease'])->name('animal.addDisease');
 
 
 Route::resources([
