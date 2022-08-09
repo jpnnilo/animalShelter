@@ -20,7 +20,7 @@ class Animal extends Model
     }
     
     public function diseases(){
-        return $this->belongsToMany(Disease::class);
+        return $this->belongsToMany(Disease::class)->withTimestamps();
     }
 
     public function animalImages(){

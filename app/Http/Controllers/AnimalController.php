@@ -6,7 +6,9 @@ use App\Models\Animal;
 use App\Models\Disease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
+use function PHPUnit\Framework\isEmpty;
 
 class AnimalController extends Controller
 {   
@@ -29,7 +31,6 @@ class AnimalController extends Controller
         } else {
             return view('animal.list', compact('listings', 'header'));
         }
-        
        
     }
 
@@ -44,6 +45,8 @@ class AnimalController extends Controller
         return view('animal.form', compact('header'));
     }
     
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -87,19 +90,20 @@ class AnimalController extends Controller
 
     //show diseases per animal
     public function addDisease(Request $request, $id){
-        $validate = $request->validate([
-            'disease' => 'required'
-        ]);
-
-        // dd($validate);
         
+        $validate = $request->validate([
+            'disease'=>'required'
+        ]);
+    
         $animal = Animal::find($id);
         $animalId = $animal->id;
         $animal->diseases()->attach($request->disease);
         $diseaseId = $request->disease;
         $status = "200";
         $message = "Disease has been added";
+        
         return response()->json(compact('status','message','animalId','diseaseId'));
+        
     }
 
     /**

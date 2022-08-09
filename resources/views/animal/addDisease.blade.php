@@ -30,9 +30,9 @@
                                 @endforelse
                               
                             </select>
-                            @error('disease')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            
+                                <div class="alert alert-danger"></div>
+                            
                         </div>
                      
                     </form>
@@ -40,7 +40,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="addDisease" class="btn btn-primary" >Save changes</button>
-
+                
                 </div>
             </div>
         </div>
