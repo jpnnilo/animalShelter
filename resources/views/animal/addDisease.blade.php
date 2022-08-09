@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('animal.addDisease', $animal->id) }}">
+                    <form >
                         @csrf
                         <div class="form-group">
                             <label class="col-form-label">Name: </label>

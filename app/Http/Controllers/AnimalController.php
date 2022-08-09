@@ -88,22 +88,31 @@ class AnimalController extends Controller
         return response()->json(compact('animal'));
     }
 
-    //show diseases per animal
+    //add diseases per animal
     public function addDisease(Request $request, $id){
         
         $validate = $request->validate([
             'disease'=>'required'
         ]);
-    
+        
         $animal = Animal::find($id);
         $animalId = $animal->id;
         $animal->diseases()->attach($request->disease);
         $diseaseId = $request->disease;
         $status = "200";
         $message = "Disease has been added";
+
+        return response()->json(compact('status','message'));
         
-        return response()->json(compact('status','message','animalId','diseaseId'));
-        
+    }
+
+    //remove diseases per animal
+    public function removeDisease(Request $request, $id){
+        $animal = Animal::find($id);
+        $animal->diseases()->detach($request->disease_id);
+        $status = "200";
+        $message = "Disease has been removed";
+        return response()->json(compact('status','message'));
     }
 
     /**
