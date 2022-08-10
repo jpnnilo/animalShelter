@@ -23,14 +23,7 @@
                             <label class="form-label">Disease:</label>
                             <select class="form-select" id="disease" name="disease">
                                 <option value="">---Select option---</option>
-                                @forelse ($diseases as $disease)
-                                    <option value="{{ $disease->id }}">{{ $disease->name }}</option>
-                                @empty
-                                    <option>No Disease Found</option>
-                                @endforelse
-                              
                             </select>
-                            
                                 <div class="alert alert-danger"></div>
                             
                         </div>
@@ -40,7 +33,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" id="addDisease" class="btn btn-primary" >Save changes</button>
-                
                 </div>
             </div>
         </div>

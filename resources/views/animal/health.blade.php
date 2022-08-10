@@ -41,10 +41,12 @@
         $(document).ready(function() 
         {
 
+            //show all available diseases for dropdown
+
+
             // show disease per animal
             showDiseases();
             function showDiseases() {
-
                 $('.alert').hide();
                 var animal_id = $("#animal_id").val();
                 $.ajax
@@ -54,9 +56,11 @@
                     dataType: 'json',
                     success: function(response)
                     {   
-                        console.log(response);
-                        $.each(response.animal, function (key, disease) 
+                        console.log(response.animal);
+                       
+                        $.each(response.animal.diseases, function (key, disease) 
                         { 
+                            
                             $('#disease-card').append('<div class="col-sm-3" id="card-disease'+disease.id+'">\
                                 <div class="card" style="width: 18rem; margin-bottom: 20px;">\
                                     <div class="card-body">\
@@ -67,6 +71,31 @@
                                     </div>\
                                 </div>');
                         });
+
+                    }
+                });
+            }
+
+            //view diseases per animal populate to dropdown
+            animalDisease();
+            function animalDisease() {
+                $('.alert').hide();
+                var animal_id = $("#animal_id").val();
+                $.ajax
+                ({
+                    type: 'GET',
+                    url: '/animal/disease/' + animal_id,
+                    dataType: 'json',
+                    success: function(response)
+                    {   
+                        console.log(response.animal);
+                        $.each(response.disease, function(key, options){
+                            $('#disease').append($('<option>',{
+                                value:options.id,
+                                text:options.name
+                            }));
+                        });
+                
                     }
                 });
             }
@@ -87,8 +116,9 @@
                     success:function(response){ 
                         console.log(response);
                         $('#disease-card').empty();
-                        
+                        $('#disease').empty();
                         showDiseases();
+                        animalDisease();
                     },
                     error: function(err) {
                         console.log(err);
@@ -115,6 +145,8 @@
                     dataType: 'json',
                     success:function(response){
                         console.log(response);
+                        $('#disease').empty();
+                        animalDisease();
                         $("#card-disease"+disease_id).remove();
                     }
                 });

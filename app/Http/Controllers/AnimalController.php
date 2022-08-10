@@ -73,19 +73,28 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
+ 
     public function show($id)
     {   
         $header = "Animal Health Status";
-        $animal = Animal::find($id);
-        $diseases = Disease::all();
-        return view('animal.health', compact('header', 'animal','diseases')); 
+        $animal = Animal::with('diseases')->find($id);
+        return view('animal.health', compact('header', 'animal')); 
     }
 
     //show diseases per animal
     public function showDiseases($id){
-        $animal = Animal::find($id)->diseases;
-        return response()->json(compact('animal'));
+        $animal = Animal::with('diseases')->find($id);
+        foreach ($animal->diseases as $diseases) {
+             $disease_array[] = $diseases->pivot->disease_id;
+        }
+        if(empty($disease_array)){
+            $disease = Disease::all();
+              
+        }else{
+            $disease = Disease::whereNotIn('id', $disease_array)->get();
+        }
+            
+        return response()->json(compact('animal','disease'));
     }
 
     //add diseases per animal
@@ -111,8 +120,7 @@ class AnimalController extends Controller
         $animal = Animal::find($id);
         $animal->diseases()->detach($request->disease_id);
         $status = "200";
-        $message = "Disease has been removed";
-        return response()->json(compact('status','message'));
+        return response()->json(compact('status'));
     }
 
     /**
