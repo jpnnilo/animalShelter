@@ -52,7 +52,7 @@
                 $.ajax
                 ({
                     type: 'GET',
-                    url: '/animal/disease/' + animal_id,
+                    url: '/api/animal/disease/' + animal_id,
                     dataType: 'json',
                     success: function(response)
                     {   
@@ -84,7 +84,7 @@
                 $.ajax
                 ({
                     type: 'GET',
-                    url: '/animal/disease/' + animal_id,
+                    url: '/api/animal/disease/' + animal_id,
                     dataType: 'json',
                     success: function(response)
                     {   
@@ -110,7 +110,7 @@
                 }
                 $.ajax({
                     type:'POST',
-                    url:'/animal/disease/' + animal_id,
+                    url:'/api/animal/disease/' + animal_id,
                     data: data,
                     dataType: 'json',
                     success:function(response){ 
@@ -140,7 +140,7 @@
                 if (confirm('Remove disease?')) {
                     $.ajax({
                     type: "DELETE",
-                    url: "/animal/disease" + animal_id,
+                    url: "/api/animal/disease" + animal_id,
                     data: data,
                     dataType: 'json',
                     success:function(response){

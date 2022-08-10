@@ -34,11 +34,7 @@ Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.l
 Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
 
 
-Route::controller(AnimalController::class)->group(function(){
-    Route::get('animal/disease/{id}', 'showDiseases');  //show diseases per animal
-    Route::post('animal/disease/{id}', 'addDisease')->name('animal.addDisease'); //add animal diseases
-    Route::delete('animal/disease{id}', 'removeDisease'); // delete animal diseases
-});
+
 
 Route::resources([
     'animal' => AnimalController::class,
