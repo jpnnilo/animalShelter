@@ -2,15 +2,18 @@
     <div class="container-fluid">
         <ul class="navbar-nav container">
 
-            <li class="nav-item">
-                <a class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : '' }}"
-                    href="{{ route('home') }}">Home</a>
-            </li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'rescuer.list' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a></li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'adopter.list' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a></li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Animals</a></li>
+        
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
+                <a class="nav-link {{ Route::current()->getName() == 'rescuer.list' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a>
+                <a class="nav-link {{ Route::current()->getName() == 'adopter.list' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a>
+                <a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Animals</a>
+            
+              </div>
+            </div>
 
-            {{-- need to add login for adminstrator --}}
+            @auth
             <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -30,9 +33,18 @@
                     </li>
                 </ul>
             </div>
-            
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'user.register' ? 'active' : '' }}" href="{{ route('user.register') }}">Register</a></li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'user.login' ? 'active' : '' }}" href="{{ route('user.login') }}">Login</a></li>
+
+                <li class="nav-item" style="color:white;"> Welcome! {{ auth()->user()->name }} </li>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                <li class="nav-item">
+                    <button class="btn btn-dark" type="submit">Logout</button>
+                </li>
+                </form>
+            @else
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.registerView') }}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.loginView') }}">Login</a></li>
+            @endauth
             
         </ul>
     </div>

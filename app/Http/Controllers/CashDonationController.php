@@ -44,11 +44,11 @@ class CashDonationController extends Controller
             'date' => 'required'
         ]);
 
-        $cashdonation = new CashDonation();
-        $cashdonation->donor = $request->name;
-        $cashdonation->amount = $request->amount;
-        $cashdonation->date = $request->date;
-        $cashdonation->save();
+        $cashDonation = new CashDonation();
+        $cashDonation->donor = $request->name;
+        $cashDonation->amount = $request->amount;
+        $cashDonation->date = $request->date;
+        $cashDonation->save();
 
         return redirect(route('cashdonation.index'));
     }
@@ -110,7 +110,6 @@ class CashDonationController extends Controller
     public function destroy($id)
     {
         CashDonation::find($id)->delete();
-        
         return redirect(route('cashdonation.index'));
     }
 }

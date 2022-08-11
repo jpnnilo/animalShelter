@@ -15,15 +15,12 @@ class AdopterController extends Controller
      */
     public function index()
     {   
-        $route = Route::currentRouteName();
+        $route = Route::currentRouteName() == 'adopter.index'? 'adopter.index': 'adopter.list' ;
         $header = "Adopter List";
         $listings = Adopter::all();
 
-        if ($route == "adopter.index") {
-            return view('adopter.index', compact('listings', 'header'));
-        } else {
-            return view('adopter.list', compact('listings', 'header'));
-        }
+        return view($route, compact('listings', 'header'));
+     
         
     }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Rescuer;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\AdopterController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\RescuerController;
 use App\Http\Controllers\EmployeeController;
@@ -35,10 +36,18 @@ Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.l
 Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
 
 //register form 
-Route::get('/user/register', [UserController::class, 'registerView'])->name('user.register');
+Route::get('/register', [AuthController::class, 'registerView'])->name('user.registerView');
 
 //login form
-Route::get('/user/login', [UserController::class, 'loginView'])->name('user.login');
+Route::get('/login', [AuthController::class, 'loginView'])->name('user.loginView');
+
+//register user
+Route::post('/register', [AuthController::class, 'register'])->name('user.register');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::resources([
