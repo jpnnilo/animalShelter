@@ -16,7 +16,7 @@ class AnimalDiseaseFactory extends Factory
      */
     public function definition()
     {
-
+        
         $animal_id = fake()->numberBetween($min=1, $max=5);
         $disease_id = fake()->numberBetween($min=1, $max=5);
         return compact('animal_id','disease_id');

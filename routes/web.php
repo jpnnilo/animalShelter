@@ -10,6 +10,7 @@ use App\Http\Controllers\RescuerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CashDonationController;
 use App\Http\Controllers\MaterialDonationController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,11 @@ Route::get('adopter/list', [AdopterController::class, 'index'])->name('adopter.l
 //list of all animal
 Route::get('animal/list', [AnimalController::class, 'index'])->name('animal.list');
 
+//register form 
+Route::get('/user/register', [UserController::class, 'registerView'])->name('user.register');
 
+//login form
+Route::get('/user/login', [UserController::class, 'loginView'])->name('user.login');
 
 
 Route::resources([

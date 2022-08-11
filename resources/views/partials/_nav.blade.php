@@ -31,8 +31,8 @@
                 </ul>
             </div>
             
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Register</a></li>
-            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Login</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'user.register' ? 'active' : '' }}" href="{{ route('user.register') }}">Register</a></li>
+            <li class="nav-item"><a class="nav-link {{ Route::current()->getName() == 'user.login' ? 'active' : '' }}" href="{{ route('user.login') }}">Login</a></li>
             
         </ul>
     </div>

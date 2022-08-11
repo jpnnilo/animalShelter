@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'name', 'age', 'breed', 'gender', 'type' ];
+    protected $fillable = [ 'name', 'age', 'breed', 'gender', 'type'];
 
     //many animal to one rescuer
     public function rescuer(){

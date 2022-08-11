@@ -9,6 +9,8 @@ class Adopter extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['email'];
+
     public function animals(){
         return $this->hasMany(Animal::class);
     }

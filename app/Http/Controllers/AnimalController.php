@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adopter;
 use App\Models\Animal;
 use App\Models\Disease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
-
 use function PHPUnit\Framework\isEmpty;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
 
 class AnimalController extends Controller
 {   
@@ -25,7 +27,7 @@ class AnimalController extends Controller
         $header = "Animal List";
         $listings = Animal::all();
 
-    
+        
         if ($route == "animal.index") {
             return view('animal.index', compact('listings','header'));
         } else {
@@ -45,7 +47,12 @@ class AnimalController extends Controller
         return view('animal.form', compact('header'));
     }
     
-
+    //view all adoptable animals
+    public function adoptable(){
+        
+        $adoptables = Animal::doesntHave('diseases')->wherenull('adopter_id')->get();
+        return response()->json(compact('adoptables'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -73,13 +80,21 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+    
+
     public function show($id)
     {   
         $header = "Animal Health Status";
         $animal = Animal::with('diseases')->find($id);
         return view('animal.health', compact('header', 'animal')); 
     }
+
+    //get animal details
+    public function animalDetails($id){
+        $animal = Animal::find($id);
+        return response()->json(compact('animal'));
+    }   
+
 
     //show diseases per animal
     public function showDiseases($id){
@@ -93,7 +108,6 @@ class AnimalController extends Controller
         }else{
             $disease = Disease::whereNotIn('id', $disease_array)->get();
         }
-            
         return response()->json(compact('animal','disease'));
     }
 
@@ -110,7 +124,6 @@ class AnimalController extends Controller
         $diseaseId = $request->disease;
         $status = "200";
         $message = "Disease has been added";
-
         return response()->json(compact('status','message'));
         
     }
@@ -163,7 +176,34 @@ class AnimalController extends Controller
         $animal->save();
         return redirect(route('animal.index')); 
     }
+    
+    // PUT/update adopter_id to animal
+    public function adopt(Request $request){
+
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'age' => 'required|numeric',
+            'gender' => 'required',
+            'address' => 'required'
+        ]);
+
+        $adopter = Adopter::firstOrNew(['email' => $request->email]);
+        $adopter->name = $request->name;
+        $adopter->email = $request->email;
+        $adopter->age = $request->age;
+        $adopter->gender = $request->gender;
+        $adopter->address = $request->address;
+        $adopter->save();
         
+        $animal = Animal::find($request->animal_id);
+        $animal->adopter_id = $adopter->id;
+        $animal->save();
+        $animal_id = $animal->id;
+        $message = "Animal has been adopted";
+        return response()->json(compact('message','validate','animal_id'));
+    }   
+
     /**
      * Remove the specified resource from storage.
      *

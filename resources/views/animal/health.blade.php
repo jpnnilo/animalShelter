@@ -10,7 +10,7 @@
                 Name:<h5 class="card-title"> {{ $animal->name }}</h5>
                 Age: <h5 class="card-text"> {{ $animal->age }}</h5>
                 Gender:<h5 class="card-text">{{ $animal->gender }}</h5>
-                Adopted by:<h5 class="card-text">{{ $animal->adopter->name }}</h5>
+                Adopted by:<h5 class="card-text">{{ isset($animal->adopter->name) ? $animal->adopter->name : "None" }}</h5>
                 Health Status:
                 @if ($animal->diseases->isEmpty())
                     <h5 class="card-text">Healthy</h5>
@@ -60,7 +60,6 @@
                        
                         $.each(response.animal.diseases, function (key, disease) 
                         { 
-                            
                             $('#disease-card').append('<div class="col-sm-3" id="card-disease'+disease.id+'">\
                                 <div class="card" style="width: 18rem; margin-bottom: 20px;">\
                                     <div class="card-body">\
@@ -123,7 +122,7 @@
                     error: function(err) {
                         console.log(err);
                         console.log(err.responseJSON.message);
-                        $('.alert').text(err.responseJSON.message).fadeIn().delay(3000).fadeOut('slow');  //
+                        $('.alert').text(err.responseJSON.message).fadeIn().delay(3000).fadeOut('slow'); 
                        
                     }   
                 });
