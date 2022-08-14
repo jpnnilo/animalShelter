@@ -45,6 +45,7 @@ class AdopterController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
+            'email' => 'required',
             'age' => 'required|numeric',
             'gender' => 'required',
             'address' => 'required',
@@ -52,13 +53,14 @@ class AdopterController extends Controller
 
         $adopter = new Adopter();
         $adopter->name = $request->name;
+        $adopter->email = $request->email;
         $adopter->age = $request->age;
         $adopter->gender = $request->gender;
         $adopter->address = $request->address;
 
         $adopter->save();
 
-        return redirect(route('adopter.index'));
+        return redirect(route('adopter.list'));
     }
 
     /**
@@ -100,6 +102,7 @@ class AdopterController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required',
+            'email' => 'required',
             'age' => 'required|numeric',
             'gender' => 'required',
             'address'=> 'required'
@@ -107,12 +110,13 @@ class AdopterController extends Controller
         
         $adopter = Adopter::find($id);
         $adopter->name = $request->name;
+        $adopter->email = $request->email;
         $adopter->age = $request->age;
         $adopter->gender = $request->gender;
         $adopter->address = $request->address;
         $adopter->save();
 
-        return redirect(route('adopter.index'));
+        return redirect(route('adopter.list'));
     }
 
     /**
@@ -124,6 +128,6 @@ class AdopterController extends Controller
     public function destroy($id)
     {
         Adopter::find($id)->delete();
-        return redirect(route('adopter.index'));
+        return redirect(route('adopter.list'));
     }
 }

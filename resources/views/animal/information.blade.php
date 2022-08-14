@@ -94,11 +94,6 @@
         text-align:center;
     }
     
-    .card{
-        margin:10px 0px;
-        
-    }
-
     .card-disease{
         margin:10px 0px;
         height: 500px;

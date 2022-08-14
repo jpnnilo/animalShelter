@@ -60,7 +60,7 @@
       <input type="file" class="form-control" name="images[]" multiple>
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
-   <button type="reset" onclick="location.href='/animal'" class="btn btn-secondary">Cancel</button>
+   <button type="reset" onclick="location.href='/animal/list'" class="btn btn-secondary">Cancel</button>
   </form>
 </div>  
 @endsection
