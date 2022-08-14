@@ -101,7 +101,7 @@ class AnimalController extends Controller
         $header = "Animal Information";
         $animal = Animal::with('diseases')->find($id);
         $image = AnimalImage::where('animal_id', $id)->first();
-        return view('animal.health', compact('header', 'animal','image')); 
+        return view('animal.information', compact('header', 'animal','image')); 
     }
 
     //get animal details
