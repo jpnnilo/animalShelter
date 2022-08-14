@@ -40,7 +40,9 @@
                     </div>
   
                   </form>
-  
+                  <div class="d-flex justify-content-center">
+                     <a href="{{ route('user.registerView') }}"><p id="signup">Not a member? Signup</p></a>
+                  </div>
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
   
@@ -55,4 +57,13 @@
       </div>
     </div>
   </section>
+@endsection
+
+@section('css')
+    <style>
+      #signup{
+        display:block;
+        margin: 0 auto;
+      }
+    </style>
 @endsection

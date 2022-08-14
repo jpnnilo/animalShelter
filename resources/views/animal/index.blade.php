@@ -29,8 +29,10 @@
         <td></td>
         <td>
           <a href="{{ route('animal.edit', [$list->id]) }}"><button type="button" class="btn btn-success">Edit</button></a> 
-          <form method="POST" action="{{ route('animal.destroy' , [$list->id]) }}" > @csrf 
-            @method('DELETE') <button type="submit" class="btn btn-danger">Delete</button>
+          <form method="POST" action="{{ route('animal.destroy' , [$list->id]) }}" > 
+            @csrf 
+            @method('DELETE') 
+            <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </td>
       </tr>

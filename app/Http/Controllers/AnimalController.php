@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Adopter;
 use App\Models\Animal;
+use App\Models\AnimalImage;
 use App\Models\Disease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,17 +24,11 @@ class AnimalController extends Controller
      */
     public function index()
     {   
-        $route = Route::currentRouteName();
+        $route = Route::currentRouteName() == 'animal.index' ? 'animal.index' : 'animal.list' ;
         $header = "Animal List";
         $listings = Animal::all();
-
         
-        if ($route == "animal.index") {
-            return view('animal.index', compact('listings','header'));
-        } else {
-            return view('animal.list', compact('listings', 'header'));
-        }
-       
+        return view($route, compact('listings', 'header'));
     }
 
     /**
@@ -62,7 +57,7 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+         $validate = $request->validate([
             'name' => 'required',
             'age' => ['required','numeric'],
             'gender' => 'required',
@@ -70,7 +65,26 @@ class AnimalController extends Controller
             'type' => 'required',
         ]);
         
-        Animal::create($validate);
+        $animal = new Animal();
+        $animal->name = $request->name;
+        $animal->age = $request->age;
+        $animal->gender = $request->gender;
+        $animal->breed = $request->breed;
+        $animal->type = $request->type;
+        $animal->save();
+
+        $animal_id = $animal->id;
+
+        if($request->hasFile('images')){
+            foreach($request->file('images') as $image){
+                $animalImages = new AnimalImage(); 
+                $animalImages->animal_id = $animal_id;
+                $animalImages->image = $image->store('images','public');
+                $animalImages->save();
+            }
+        }
+        
+
         return redirect(route('animal.index'));
     }
     
@@ -84,9 +98,10 @@ class AnimalController extends Controller
 
     public function show($id)
     {   
-        $header = "Animal Health Status";
+        $header = "Animal Information";
         $animal = Animal::with('diseases')->find($id);
-        return view('animal.health', compact('header', 'animal')); 
+        $image = AnimalImage::where('animal_id', $id)->first();
+        return view('animal.health', compact('header', 'animal','image')); 
     }
 
     //get animal details
@@ -132,8 +147,8 @@ class AnimalController extends Controller
     public function removeDisease(Request $request, $id){
         $animal = Animal::find($id);
         $animal->diseases()->detach($request->disease_id);
-        $status = "200";
-        return response()->json(compact('status'));
+        $diseases = $animal->diseases; // for check if animal still has diseases
+        return response()->json(compact('diseases'));
     }
 
     /**
@@ -213,7 +228,7 @@ class AnimalController extends Controller
     public function destroy($id)
     {
         Animal::find($id)->delete();
-        return redirect( route('animal.index'));
+        return redirect( route('animal.list'));
     }
 
 }

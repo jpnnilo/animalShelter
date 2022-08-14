@@ -16,14 +16,14 @@ return new class extends Migration
         
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('rescuer_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('rescuer_id')->nullable()->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('adopter_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->string('name');
             $table->string('breed');  
             $table->string('gender'); 
             $table->integer('age');
             $table->string('type');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

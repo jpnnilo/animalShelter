@@ -3,15 +3,16 @@
 use App\Models\Animal;
 use App\Http\Controllers\Rescuer;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\AdopterController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DiseaseController;
 use App\Http\Controllers\RescuerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CashDonationController;
 use App\Http\Controllers\MaterialDonationController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
 Route::resources([
