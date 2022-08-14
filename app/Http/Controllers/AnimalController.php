@@ -85,7 +85,7 @@ class AnimalController extends Controller
         }
         
 
-        return redirect(route('animal.index'));
+        return redirect(route('animal.list'));
     }
     
     /**
@@ -189,7 +189,7 @@ class AnimalController extends Controller
         $animal->breed = $request->breed;
         $animal->type = $request->type;
         $animal->save();
-        return redirect(route('animal.index')); 
+        return redirect(route('animal.list')); 
     }
     
     // PUT/update adopter_id to animal
