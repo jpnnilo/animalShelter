@@ -42,13 +42,16 @@ Route::get('/register', [AuthController::class, 'registerView'])->name('user.reg
 //login form
 Route::get('/login', [AuthController::class, 'loginView'])->name('user.loginView');
 
+//show diseases
+Route::get('animal/disease/{id}', [AnimalController::class, 'showDiseases']);  //show diseases per animal')
+
 //register user
 Route::post('/register', [AuthController::class, 'register'])->name('user.register');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
 

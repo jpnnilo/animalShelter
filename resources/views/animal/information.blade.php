@@ -22,11 +22,11 @@
 
 
     <!-- Button trigger modal -->
-    <div class="">
-        <button class="btn btn-primary" data-bs-toggle="modal" id="modal-addDisease" data-bs-target="#addDisease-modal" >
-            Add Disease
-        </button>
+    @auth
+    <div>
+        <button class="btn btn-primary" data-bs-toggle="modal" id="modal-addDisease" data-bs-target="#addDisease-modal" > Add Disease </button>
     </div>
+    @endauth
     
 
     <!-- Modal -->
@@ -140,19 +140,20 @@
             function showDiseases() {
                 $('.alert').hide();
                 $('.animalDiseases-header').hide();
+                
                 var animal_id = $("#animal_id").val();
                 $.ajax
                 ({
                     type: 'GET',
-                    url: '/api/animal/disease/' + animal_id,
+                    url: '/animal/disease/' + animal_id,
                     dataType: 'json',
                     success: function(response)
                     {   
                         console.log(response.animal.diseases);
-                        
+                        console.log(response);
                         if(response.animal.diseases.length == 0 ){
                             $('.health-status').html('<span> Health Status: </span> Healthy' );
-                         
+                            
                         }else{
                             $('.health-status').html('<span> Health Status: </span> Sick' );
                             $('.animalDiseases-header').show();
@@ -160,10 +161,10 @@
 
                         $.each(response.animal.diseases, function (key, disease) 
                         {   
-                            $('#disease-card').append('<div class="col-lg-3 col-md-4 col-sm-6" id="card-disease'+disease.id+'">\
+                            $('#disease-card').append('<div class="co   l-lg-3 col-md-4 col-sm-6" id="card-disease'+disease.id+'">\
                                 <div class="card">\
                                     <div class="card-body card-disease">\
-                                        <button type="button" class="btn btn-danger removeDisease" data-id="'+ disease.id +'">X </button>\
+                                        '+ ( response.auth == '' ? '' : '<button type="button" class="btn btn-danger removeDisease" data-id="'+ disease.id +'">X</button>')+'\
                                          <h5 class="card-title">'+ disease.name +'</h5>\
                                         Description: <p class="card-text">'+ disease.description +'</p>\
                                         </div>\
@@ -174,17 +175,17 @@
                     }
                 });
             }
-
+            
             //view diseases per animal populate to dropdown
             animalDisease();
-
+            
             function animalDisease() {
                 $('.alert').hide();
                 var animal_id = $("#animal_id").val();
                 $.ajax
                 ({
                     type: 'GET',
-                    url: '/api/animal/disease/' + animal_id,
+                    url: '/animal/disease/' + animal_id,
                     dataType: 'json',
                     success: function(response)
                     {   

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adopter;
 use App\Models\Animal;
-use App\Models\AnimalImage;
+use App\Models\Adopter;
 use App\Models\Disease;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use function PHPUnit\Framework\isEmpty;
+use App\Models\AnimalImage;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+use function PHPUnit\Framework\isEmpty;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 
@@ -84,7 +87,6 @@ class AnimalController extends Controller
             }
         }
         
-
         return redirect(route('animal.list'));
     }
     
@@ -113,22 +115,29 @@ class AnimalController extends Controller
 
     //show diseases per animal
     public function showDiseases($id){
+        
         $animal = Animal::with('diseases')->find($id);
         foreach ($animal->diseases as $diseases) {
              $disease_array[] = $diseases->pivot->disease_id;
+             //get all diseases id from pivot table the pass it to array
         }
         if(empty($disease_array)){
             $disease = Disease::all();
               
         }else{
             $disease = Disease::whereNotIn('id', $disease_array)->get();
+            //select all diseases id where not in id of array $disease_array
         }
-        return response()->json(compact('animal','disease'));
+
+        //check if someone is login ayaw gumana
+       $auth = (isset(auth()->user()->name) ? auth()->user()->name : '');
+
+        return response()->json(compact('animal','disease','auth'));
     }
 
     //add diseases per animal
     public function addDisease(Request $request, $id){
-        
+
         $validate = $request->validate([
             'disease'=>'required'
         ]);

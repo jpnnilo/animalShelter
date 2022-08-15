@@ -48,7 +48,7 @@ class AuthController extends Controller
         ]);
     
        
-        //auth() = AUTH::
+        //auth() helper = AUTH:: facade
         if(auth()->attempt($credentials)){
             $request->session()->regenerate();
             return redirect(route('home'));
