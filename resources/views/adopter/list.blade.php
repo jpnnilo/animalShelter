@@ -2,7 +2,10 @@
 
 @section('content')
     <H2 class="header">{{ $header }}</H2>
+    @auth
     <div class="create"><a href="{{ route('adopter.create') }}"><button type="button" class="btn btn-primary create__elem">Create</button></a></div>
+    @endauth
+    
     <div class="row ">
         @foreach ($listings as $list)
         <div class="col-lg-3 col-md-4 col-sm-6 my-2">
@@ -14,12 +17,14 @@
                     <p class="card-text">Address: {{ $list->address }}</p>
                    
                     <a href="{{ route('adopter.show', $list->id) }}"><button type="button" Class="btn btn-success">View</button></a>
-                    <a href="{{ route('adopter.edit', [$list->id]) }}"><button type="button" Class="btn btn-warning">Edit</button></a>
-                    <form method="POST" action="{{ route('adopter.destroy' , [$list->id]) }}" > 
-                        @csrf 
-                        @method('DELETE') 
-                        <button type="submit" Class="btn btn-danger">Delete</button>
-                    </form>
+                    @auth
+                        <a href="{{ route('adopter.edit', [$list->id]) }}"><button type="button" Class="btn btn-warning">Edit</button></a>
+                        <form method="POST" action="{{ route('adopter.destroy' , [$list->id]) }}" > 
+                            @csrf 
+                            @method('DELETE') 
+                            <button type="submit" Class="btn btn-danger">Delete</button>
+                        </form>
+                    @endauth
                 </div>
             </div>
         </div>

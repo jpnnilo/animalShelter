@@ -1,9 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-
 <div class="container">
-
 <H2 >{{ $header }}</H2>
 <div class="float-end "><a href="{{ route('adopter.create') }}"><button type="button" class="btn btn-primary">Create</button></a></div>
 <table class="table">
