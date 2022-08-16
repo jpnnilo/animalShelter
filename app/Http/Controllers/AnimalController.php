@@ -108,6 +108,7 @@ class AnimalController extends Controller
 
     //get animal details
     public function animalDetails($id){
+        // $animal = Animal::find($id);
         $animal = Animal::find($id);
         return response()->json(compact('animal'));
     }   
@@ -201,7 +202,7 @@ class AnimalController extends Controller
         return redirect(route('animal.list')); 
     }
     
-    // PUT/update adopter_id to animal
+    // PUT/update adopter_id to animal to adopt
     public function adopt(Request $request){
 
         $validate = $request->validate([

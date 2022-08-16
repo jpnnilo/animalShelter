@@ -1,8 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <h3>ANIMAL SHELTER</h3>
-
+    
+    
+    <h3 class="title">ANIMAL SHELTER</h3>
+   
     <h4>Adoptable Animals</h4>
     <div class="row adoptable-list">
         {{-- insert adoptable() from js --}}
@@ -12,7 +14,25 @@
     @include('adopt')
 
 @endsection
+@section('css')
+<style>
+    
+    .title{
+      text-align:center;
+      margin: 30px 0;
+    }
+    
+    .card{
+        margin: 10px 0;
+        padding: 10px;
+    }
 
+    .card-text{
+        margin:10px;
+    }
+
+</style>
+@endsection
 
 @section('js')
     <script>
@@ -29,8 +49,8 @@
                         console.log(response);
                         $.each(response.adoptables, function(key, adoptable) {
                             $('.adoptable-list').append('\
-                                <div class="col-lg-3 card-adoptable'+adoptable.id+'">\
-                                    <div class="card" style="width: 18rem;">\
+                                <div class="col-lg-3 col-md-4 col-sm-6 card-adoptable'+adoptable.id+'">\
+                                    <div class="card">\
                                         <img src="{{ url('images/noImage.jpg') }}" class="card-img-top" alt="...">\
                                         <div class="card-body">\
                                             <h5 class="card-title">' + adoptable.name + '</h5>\
@@ -96,10 +116,11 @@
                     dataType: "json",
                     success: function(response) {
                         console.log(response);
+                        console.log(response.animals);
                         $('#adopt-modal-2').modal('toggle');
                         $('.card-adoptable'+response.animal_id).remove();
                         alert(response.message);
-
+                        
                     },
                     error:function(err){
                         console.log(err);
@@ -130,3 +151,8 @@
         });
     </script>
 @endsection
+
+
+
+
+

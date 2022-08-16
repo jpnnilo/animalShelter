@@ -14,7 +14,7 @@
     <title>Animal Shelter</title>
 </head>
 
-<body>
+<body class="bg-light">
         @include('partials._nav')
     <div class="container">
         <div>

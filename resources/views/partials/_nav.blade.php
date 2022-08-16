@@ -1,48 +1,65 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <ul class="navbar-nav container">
-
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
-                <a class="nav-link {{ Route::current()->getName() == 'rescuer.list' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a>
-                <a class="nav-link {{ Route::current()->getName() == 'adopter.list' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a>
-                <a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Animals</a>
-                @auth
-                <div class="collapse navbar-collapse " id="navbarNavDarkDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin   
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{{ route('employee.index') }}">Employee</a></li>
-                                <li><a class="dropdown-item" href="{{ route('disease.index') }}">Disease</a> </li>
-                                <li><a class="dropdown-item" href="{{ route('cashdonation.index') }}">Cash Donation</a></li>
-                                <li><a class="dropdown-item" href="{{ route('materialdonation.index') }}">Material Donation</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-
-           
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link {{ Route::current()->getName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Route::current()->getName() == 'rescuer.list' ? 'active' : '' }}" href="{{ route('rescuer.list') }}">Rescuers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Route::current()->getName() == 'adopter.list' ? 'active' : '' }}" href="{{ route('adopter.list') }}">Adopters</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ Route::current()->getName() == 'animal.list' ? 'active' : '' }}" href="{{ route('animal.list') }}">Animals</a>
+          </li>
+          @auth
             
-           
-                <li class="nav-item" style="color:white;"> Welcome! {{ auth()->user()->name }} </li>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                <li class="nav-item">
-                    <button class="btn btn-dark" type="submit">Logout</button>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin   
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ route('employee.index') }}">Employee</a></li>
+                        <li><a class="dropdown-item" href="{{ route('disease.index') }}">Disease</a> </li>
+                        <li><a class="dropdown-item" href="{{ route('cashdonation.index') }}">Cash Donation</a></li>
+                        <li><a class="dropdown-item" href="{{ route('materialdonation.index') }}">Material Donation</a></li>
+                    </ul>
                 </li>
-                </form>
-            @else
-                <li class="nav-item"><a class="nav-link" href="{{ route('user.loginView') }}">Login</a></li>
-            @endauth
-        </div>
+            </ul>
+          
+        
+
         </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item" style="color:white;"> <h6 style="margin-top:11px;"> Welcome! {{ auth()->user()->name }} </h6></li>
+          <li class="nav-item">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+            
+                <button class="btn btn-dark" type="submit">Logout</button>
+            
+              </form>
+            </li> 
+          @else
+          
+        </ul>
+          <ul class="navbar-nav">
+            <li class="navbar-item">
+              <a class="nav-link float-end" href="{{ route('user.loginView') }}">Login</a>
+            </li>
+          
+          @endauth
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
+
+  

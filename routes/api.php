@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //jquery ajax   
 Route::controller(AnimalController::class)->group(function(){
     Route::get('/', 'adoptable')->name('adoptable'); //view all adoptable animals
-    Route::get('animal/details/{id}', 'animalDetails')->name('animal.details'); //view all adoptable animals
+    Route::get('animal/details/{id}', 'animalDetails')->name('animal.details'); //view animal details
     // Route::get('animal/disease/{id}', 'showDiseases');  //moved to web since API can't state authentication session
     Route::post('animal/disease/{id}', 'addDisease')->name('animal.addDisease'); //add animal diseases
     Route::post('animal/details/adopt', 'adopt')->name('animal.details.adopt'); // put/update adopter_id to animal
