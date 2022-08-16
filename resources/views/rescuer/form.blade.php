@@ -3,7 +3,7 @@
 @section('content')
  
 <div class="container">
-  <H2>{{ $header }}</H2>
+  <H2 class="header">{{ $header }}</H2>
   <form method="POST" action="{{  isset($rescuer) ? route('rescuer.update', [$rescuer->id]) :  route('rescuer.store')  }}">
     @if (isset($rescuer))
       @method('PUT')
@@ -39,8 +39,18 @@
     
     <div>
       <button type="submit" class="btn btn-success">Submit</button>
-      <button type="reset" onclick="location.href='{{ route('rescuer.index') }}'" class="btn btn-secondary">Cancel</button>
+      <button type="reset" onclick="location.href='{{ route('rescuer.list') }}'" class="btn btn-secondary">Cancel</button>
     </div>  
   </form>
 </div>  
+@endsection
+
+@section('css')
+    <style>
+
+      .header{
+          text-align:center;
+          margin: 20px 0;
+      }   
+    </style>
 @endsection

@@ -28,7 +28,7 @@ class RescuerController extends Controller
         } else {
             return view('rescuer.list',compact('header','listings'));
         }
-
+    
     }
 
     /**
@@ -56,7 +56,7 @@ class RescuerController extends Controller
             'gender' => 'required',
         ]);
         Rescuer::create($validate);
-        return redirect(route('rescuer.index'));
+        return redirect(route('rescuer.list'));
     }
 
 
@@ -70,7 +70,7 @@ class RescuerController extends Controller
     public function show($id)
     {   
         $header = "Rescuer Information";
-        $rescuer = Rescuer::find($id);
+        $rescuer = Rescuer::with('animals')->find($id);
         return view('rescuer.information', compact('rescuer', 'header'));    
     }
 
@@ -85,6 +85,36 @@ class RescuerController extends Controller
         $header = "Update Rescuer";
         $rescuer = rescuer::find($id);
         return view('rescuer.form', compact('header', 'rescuer'));
+    }
+
+    //add rescued animal
+    public function addAnimal(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'age'=> 'required|numeric',
+            'gender' => 'required',
+            'breed' => 'required',
+            'type' => 'required',
+            'location' => 'required'
+        ]); 
+
+        
+        
+
+        $animal = new Animal();
+        $animal->rescuer_id = $request->rescuer_id;
+        $animal->name = $request->name;
+        $animal->age = $request->age;
+        $animal->gender = $request->gender;
+        $animal->breed = $request->breed;
+        $animal->type = $request->type;
+        $animal->location = $request->location;
+        $animal->save();
+
+        $rescuer = Rescuer::with('animals')->find($request->rescuer_id); // checking rescued total rescued animal
+        $message = "Animal has been added!";
+        return response()->json(compact('message','animal','rescuer'));
     }
 
     /**
@@ -108,7 +138,18 @@ class RescuerController extends Controller
         $rescuer->gender = $request->gender;
         $rescuer->save();
 
-        return redirect(route('rescuer.index'));
+        return redirect(route('rescuer.list'));
+    }
+
+     //remove animal from rescuer
+     public function deleteAnimal(Request $request){
+        
+        
+        $animal = Animal::find($request->animal_id)->delete();
+        $rescuer = Rescuer::with('animals')->find($request->rescuer_id);
+        $message = "Animal has been deleted";
+        return response()->json(compact('message','animal','rescuer'));
+        
     }
 
     /**
@@ -120,6 +161,8 @@ class RescuerController extends Controller
     public function destroy($id)
     {
         Rescuer::find($id)->delete();
-        return redirect(route('rescuer.index'));
+        return redirect(route('rescuer.list'));
     }
+
+   
 }

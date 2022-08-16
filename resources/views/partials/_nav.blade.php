@@ -18,10 +18,7 @@
                                 Admin   
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="{{ route('animal.index') }}">Animal</a></li>
-                                <li><a class="dropdown-item" href="{{ route('rescuer.index') }}">Rescuer</a></li>
                                 <li><a class="dropdown-item" href="{{ route('employee.index') }}">Employee</a></li>
-                                <li><a class="dropdown-item" href="{{ route('adopter.index') }}">Adopter</a></li>
                                 <li><a class="dropdown-item" href="{{ route('disease.index') }}">Disease</a> </li>
                                 <li><a class="dropdown-item" href="{{ route('cashdonation.index') }}">Cash Donation</a></li>
                                 <li><a class="dropdown-item" href="{{ route('materialdonation.index') }}">Material Donation</a></li>
