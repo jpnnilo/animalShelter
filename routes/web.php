@@ -53,14 +53,27 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-
+Route::middleware('auth')->group(function(){
+    Route::resources([
+        
+        'rescuer' => RescuerController::class,
+        'adopter' => AdopterController::class,
+        'employee' => EmployeeController::class,
+        'disease' => DiseaseController::class,
+        'cashdonation' => CashDonationController::class,
+        'materialdonation' => MaterialDonationController::class
+    ]);
+    
+    Route::resources([
+        'animal'=> AnimalController::class,
+        'rescuer'=> RescuerController::class,
+        'adopter'=> AdopterController::class
+    ],['except'=>'show']);
+});
 
 Route::resources([
-    'animal' => AnimalController::class,
-    'rescuer' => RescuerController::class,
-    'employee' => EmployeeController::class,
-    'adopter' => AdopterController::class,
-    'disease' => DiseaseController::class,
-    'cashdonation' => CashDonationController::class,
-    'materialdonation' => MaterialDonationController::class
-]);
+    'animal'=> AnimalController::class,
+    'rescuer'=> RescuerController::class,
+    'adopter'=> AdopterController::class
+], ['only'=>'show']);
+
