@@ -5,20 +5,63 @@
     <h3 class="header">{{ $header }}</h3>
 
 
-    <div class="card " id="card-details"style="width: 18rem;">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card " id="card-details"style="width: 18rem;">
         
-        <img src=" {{ isset($image->image) ? url('storage/'. $image->image):"/images/noImage.jpg"}}">      
-        
-        <div class="card-body">
-            <h5 class="card-title"><span>Name:</span>  {{ $animal->name }}</h5>
-            <h5 class="card-text"><span>Age:</span>  {{ $animal->age }}</h5>
-           <h5 class="card-text"><span>Gender:</span>  {{ $animal->gender }}</h5>
-            <h5 class="card-text">
-                <span>Adopted by:</span>
-                 {{ isset($animal->adopter->name) ? $animal->adopter->name : 'None' }}</h5>
-            <h5 class="card-text health-status"><span>Health Status: </span>   </h5>
+                <img src=" {{ isset($image->image) ? url('storage/'. $image->image):"/images/noImage.jpg"}}">      
+                
+                <div class="card-body">
+                    <h5 class="card-title"><span>Name:</span>  {{ $animal->name }}</h5>
+                    <h5 class="card-text"><span>Age:</span>  {{ $animal->age }}</h5>
+                   <h5 class="card-text"><span>Gender:</span>  {{ $animal->gender }}</h5>
+                    <h5 class="card-text">
+                        <span>Adopted by:</span>
+                         {{ isset($animal->adopter->name) ? $animal->adopter->name : 'None' }}</h5>
+                    <h5 class="card-text health-status"><span>Health Status: </span>   </h5>
+                </div>
+              </div>
+
         </div>
-      </div>
+        <div class="col-lg-9">
+           
+
+              <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+       
+                <div class="carousel-inner" >
+        
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="{{  url('images/noImage.jpg') }}" class="d-block w-75  mx-auto carousel-img" alt="...">
+                       
+                      </div>
+        
+                    @forelse ($animal->animalImages as $images)
+                    <div class="carousel-item " data-bs-interval="3000">
+                        <img src="{{  url('storage/'. $images->image) }}" class="d-block w-75  mx-auto carousel-img" alt="...">
+                       
+                      </div>
+                    @empty
+                        
+                    @endforelse
+        
+                 
+                </div>
+                <button class="carousel-control-prev carousel-button" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next carousel-button" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+
+   
+
 
 
     <!-- Button trigger modal -->
@@ -76,13 +119,26 @@
 @section('css')
 <style>
 
+    
+
+    .carousel-button{
+        margin: auto 10%;
+    }
+    .carousel-inner{
+        width:100%; height: 500px;
+    }
+
+    .carousel-img{
+        height: 30em;
+    }
+
     #modal-addDisease{
         display: block;
         margin: 10px auto;
     }
 
     #card-details{
-        margin: 20px auto;
+        margin: 0px auto 20px;
     }
 
     .header{

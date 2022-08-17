@@ -48,7 +48,7 @@ class AnimalController extends Controller
     //view all adoptable animals
     public function adoptable(){
         
-        $adoptables = Animal::doesntHave('diseases')->wherenull('adopter_id')->get();
+        $adoptables = Animal::with('animalImages')->doesntHave('diseases')->wherenull('adopter_id')->get();
         return response()->json(compact('adoptables'));
     }
 
@@ -101,7 +101,7 @@ class AnimalController extends Controller
     public function show($id)
     {   
         $header = "Animal Information";
-        $animal = Animal::with('diseases')->find($id);
+        $animal = Animal::with(['diseases','animalImages'])->find($id);
         $image = AnimalImage::where('animal_id', $id)->first();
         return view('animal.information', compact('header', 'animal','image')); 
     }
@@ -109,7 +109,7 @@ class AnimalController extends Controller
     //get animal details
     public function animalDetails($id){
         // $animal = Animal::find($id);
-        $animal = Animal::find($id);
+        $animal = Animal::with('animalImages')->find($id);
         return response()->json(compact('animal'));
     }   
 
